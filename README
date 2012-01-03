@@ -1,0 +1,15 @@
+== INSTALL ==
+
+1) Clone the repo into your computer.
+2) Copy the source where you want (most of cases you'll need  more copy of the code).
+3) Open the downloaded "exporter" file in your favorite text editor.
+4) Add "user", "pass", "db" and "host" variables' values.
+
+== USAGE ==
+$ ./dbexporter
+If it's a Drupal site, the script will check Drush, and if it's exist clear the cache tables with it.
+The exported file will compress with gzip.
+The exported file name will ymd_H:M_dbname.sql.gz.
+
+== WARNING ==
+Maybe you have to add execute permission to the downloaded shell script (chmod ug+x dbexporter).
