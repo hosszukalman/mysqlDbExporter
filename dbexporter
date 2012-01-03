@@ -3,5 +3,6 @@
 user="";
 pass="";
 db="";
+host="localhost";
 
 exit 0;
