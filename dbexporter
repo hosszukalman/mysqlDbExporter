@@ -5,4 +5,6 @@ pass="";
 db="";
 host="localhost";
 
+type drush &>/dev/null && (echo "Clear Drupal cache tables..."; drush cc all;)
+
 exit 0;
