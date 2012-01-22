@@ -4,11 +4,12 @@ user="";
 pass="";
 db="";
 host="localhost";
+filepath="./";
 
 type drush &>/dev/null && (echo "Clear Drupal cache tables..."; drush cc all;)
 
 echo "Export database...";
-mysqldump -h$host -u$user -p$pass $db --add-drop-table -e | gzip > `date "+%y%m%d_%H%M"`_$db.sql.gz;
-echo "The database is exported to `date "+%y%m%d_%H%M"`_$db.sql.gz";
+mysqldump -h$host -u$user -p$pass $db --add-drop-table -e | gzip > $filepath`date "+%y%m%d_%H%M"`_$db.sql.gz;
+echo "The database is exported to $filepath`date "+%y%m%d_%H%M"`_$db.sql.gz";
 
 exit 0;
