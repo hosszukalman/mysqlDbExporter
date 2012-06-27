@@ -6,10 +6,17 @@ db="";
 host="localhost";
 filepath="./";
 
-type drush &>/dev/null && (echo "Clear Drupal cache tables..."; drush cc all;)
+# Store tables
+filename=$filepath`date "+%y%m%d_%H%M"`_$db.sql;
+datatables=`mysql -ND -h$host -u$user -p$pass $db -e "SHOW TABLES" | egrep -v '(^search.*)|(^cache.*)|^(accesslog|cache|sessions|watchdog)$'`;
+cachetables=`mysql -ND -h$host -u$user -p$pass $db -e "SHOW TABLES" | egrep '(^search.*)|(^cache.*)|^(accesslog|cache|sessions|watchdog)$'`;
 
+# Create structure and data dumps
 echo "Export database...";
-mysqldump -h$host -u$user -p$pass $db --add-drop-table -e | gzip > $filepath`date "+%y%m%d_%H%M"`_$db.sql.gz;
-echo "The database is exported to $filepath`date "+%y%m%d_%H%M"`_$db.sql.gz";
+mysqldump -h$host -u$user -p$pass --no-data --add-drop-table -e $db $cachetables > $filename;
+mysqldump -h$host -u$user -p$pass --add-drop-table -e $db $datatables >> $filename;
+# Craete archive
+gzip $filename;
 
+echo "The database is exported to $filename.gz";
 exit 0;
