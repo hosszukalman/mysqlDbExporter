@@ -7,7 +7,7 @@
 
 == USAGE ==
 $ ./dbexporter
-If it's a Drupal site, the script will check Drush, and if it's exist clear the cache tables with it.
+It stores only data stucture of Drupal related cache tables, included log, session and search tables.
 The exported file will compress with gzip.
 The exported file name will ymd_H:M_dbname.sql.gz.
 
